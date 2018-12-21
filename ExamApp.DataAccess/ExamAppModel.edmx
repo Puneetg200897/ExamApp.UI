@@ -1,0 +1,1026 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CMSContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleID" Type="int" Nullable="false" />
+          <Property Name="PageName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="KeyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CMSModule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CMSPage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleID" Type="int" Nullable="false" />
+          <Property Name="PageName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="KeyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Examination">
+          <Key>
+            <PropertyRef Name="ExamID" />
+          </Key>
+          <Property Name="ExamID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="CandidateID" Type="bigint" Nullable="false" />
+          <Property Name="ExamDuration" Type="bigint" />
+          <Property Name="ExamStatus" Type="varchar" MaxLength="100" />
+          <Property Name="ConductedOn" Type="datetime" />
+          <Property Name="LastActiveSession" Type="datetime" />
+          <Property Name="CompletedOn" Type="datetime" />
+          <Property Name="TotalMarks" Type="int" />
+          <Property Name="ObtainedMarks" Type="decimal" Precision="7" Scale="3" />
+          <Property Name="ExamResult" Type="varchar" MaxLength="10" />
+          <Property Name="Commment" Type="varchar" MaxLength="1000" />
+          <Property Name="ScheduledOn" Type="datetime" />
+          <Property Name="ScheduledBy" Type="bigint" />
+          <Property Name="ReScheduledBy" Type="bigint" />
+          <Property Name="ReScheduledOn" Type="datetime" />
+          <Property Name="ConductedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExamQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamID" Type="bigint" Nullable="false" />
+          <Property Name="QuestionID" Type="bigint" Nullable="false" />
+          <Property Name="OptionID" Type="bigint" Nullable="false" />
+          <Property Name="QuestionStatus" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExamUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserLoginID" Type="varchar" MaxLength="500" />
+          <Property Name="FName" Type="varchar" MaxLength="50" />
+          <Property Name="MName" Type="varchar" MaxLength="50" />
+          <Property Name="LName" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Contact" Type="varchar" MaxLength="15" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GroupMaster">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="GroupDesc" Type="varchar" MaxLength="500" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OptionMaster">
+          <Key>
+            <PropertyRef Name="OptionID" />
+          </Key>
+          <Property Name="OptionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionID" Type="bigint" Nullable="false" />
+          <Property Name="OptionLabel" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="OptionDesc" Type="varchar" MaxLength="1000" />
+          <Property Name="Correct" Type="bit" Nullable="false" />
+          <Property Name="MarksForOption" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuizMaster">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubGroupID" Type="int" Nullable="false" />
+          <Property Name="SequenceID" Type="int" />
+          <Property Name="QuestionType" Type="char" MaxLength="3" />
+          <Property Name="Question" Type="varchar(max)" Nullable="false" />
+          <Property Name="MaxMarks" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamID" Type="bigint" Nullable="false" />
+          <Property Name="SubGroupID" Type="int" Nullable="false" />
+          <Property Name="GroupTotal" Type="int" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SubGroupMaster">
+          <Key>
+            <PropertyRef Name="SubGroupID" />
+          </Key>
+          <Property Name="SubGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="SubGroupName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="TimeToComplete" Type="float" />
+          <Property Name="SubGroupDesc" Type="varchar" MaxLength="500" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FName" Type="varchar" MaxLength="50" />
+          <Property Name="MName" Type="varchar" MaxLength="50" />
+          <Property Name="LName" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Contact" Type="varchar" MaxLength="15" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <Association Name="Examination_ExamUser_FK">
+          <End Role="ExamUser" Type="Self.ExamUser" Multiplicity="1" />
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExamUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Examination_GroupMaster_FK">
+          <End Role="GroupMaster" Type="Self.GroupMaster" Multiplicity="1" />
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupMaster">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ExamQuestion_Examination_FK">
+          <End Role="Examination" Type="Self.Examination" Multiplicity="1" />
+          <End Role="ExamQuestion" Type="Self.ExamQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examination">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="ExamQuestion">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ExamQuestion_OptionMaster_FK">
+          <End Role="OptionMaster" Type="Self.OptionMaster" Multiplicity="1" />
+          <End Role="ExamQuestion" Type="Self.ExamQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionMaster">
+              <PropertyRef Name="OptionID" />
+            </Principal>
+            <Dependent Role="ExamQuestion">
+              <PropertyRef Name="OptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ExamQuestion_QuizMaster_FK">
+          <End Role="QuizMaster" Type="Self.QuizMaster" Multiplicity="1" />
+          <End Role="ExamQuestion" Type="Self.ExamQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuizMaster">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="ExamQuestion">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GroupMaster_SubGroupMaster_FK">
+          <End Role="GroupMaster" Type="Self.GroupMaster" Multiplicity="1" />
+          <End Role="SubGroupMaster" Type="Self.SubGroupMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupMaster">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="SubGroupMaster">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="QuizMaster_OptionMaster_FK">
+          <End Role="QuizMaster" Type="Self.QuizMaster" Multiplicity="1" />
+          <End Role="OptionMaster" Type="Self.OptionMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuizMaster">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="OptionMaster">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="QuizMaster_SubGroupMaster_FK">
+          <End Role="SubGroupMaster" Type="Self.SubGroupMaster" Multiplicity="1" />
+          <End Role="QuizMaster" Type="Self.QuizMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubGroupMaster">
+              <PropertyRef Name="SubGroupID" />
+            </Principal>
+            <Dependent Role="QuizMaster">
+              <PropertyRef Name="SubGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Result_Examination_FK">
+          <End Role="Examination" Type="Self.Examination" Multiplicity="1" />
+          <End Role="Result" Type="Self.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examination">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Result_SubGroupMaster_FK">
+          <End Role="SubGroupMaster" Type="Self.SubGroupMaster" Multiplicity="1" />
+          <End Role="Result" Type="Self.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubGroupMaster">
+              <PropertyRef Name="SubGroupID" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="SubGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ManageCMSContent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pflag" Type="varchar" Mode="In" />
+          <Parameter Name="ID" Type="bigint" Mode="In" />
+          <Parameter Name="ModuleID" Type="int" Mode="In" />
+          <Parameter Name="PageName" Type="nvarchar" Mode="In" />
+          <Parameter Name="KeyName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Language" Type="nvarchar" Mode="In" />
+          <Parameter Name="Content" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ManageContent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pflag" Type="varchar" Mode="In" />
+          <Parameter Name="ID" Type="bigint" Mode="In" />
+          <Parameter Name="ModuleID" Type="int" Mode="In" />
+          <Parameter Name="PageName" Type="nvarchar" Mode="In" />
+          <Parameter Name="KeyName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Content" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+        </Function>
+        <EntityContainer Name="TTModelStoreContainer">
+          <EntitySet Name="CMSContent" EntityType="Self.CMSContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CMSModule" EntityType="Self.CMSModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CMSPage" EntityType="Self.CMSPage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Examination" EntityType="Self.Examination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExamQuestion" EntityType="Self.ExamQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExamUser" EntityType="Self.ExamUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupMaster" EntityType="Self.GroupMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OptionMaster" EntityType="Self.OptionMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuizMaster" EntityType="Self.QuizMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Result" EntityType="Self.Result" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubGroupMaster" EntityType="Self.SubGroupMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Examination_ExamUser_FK" Association="Self.Examination_ExamUser_FK">
+            <End Role="ExamUser" EntitySet="ExamUser" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="Examination_GroupMaster_FK" Association="Self.Examination_GroupMaster_FK">
+            <End Role="GroupMaster" EntitySet="GroupMaster" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="ExamQuestion_Examination_FK" Association="Self.ExamQuestion_Examination_FK">
+            <End Role="Examination" EntitySet="Examination" />
+            <End Role="ExamQuestion" EntitySet="ExamQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="ExamQuestion_OptionMaster_FK" Association="Self.ExamQuestion_OptionMaster_FK">
+            <End Role="OptionMaster" EntitySet="OptionMaster" />
+            <End Role="ExamQuestion" EntitySet="ExamQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="ExamQuestion_QuizMaster_FK" Association="Self.ExamQuestion_QuizMaster_FK">
+            <End Role="QuizMaster" EntitySet="QuizMaster" />
+            <End Role="ExamQuestion" EntitySet="ExamQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="GroupMaster_SubGroupMaster_FK" Association="Self.GroupMaster_SubGroupMaster_FK">
+            <End Role="GroupMaster" EntitySet="GroupMaster" />
+            <End Role="SubGroupMaster" EntitySet="SubGroupMaster" />
+          </AssociationSet>
+          <AssociationSet Name="QuizMaster_OptionMaster_FK" Association="Self.QuizMaster_OptionMaster_FK">
+            <End Role="QuizMaster" EntitySet="QuizMaster" />
+            <End Role="OptionMaster" EntitySet="OptionMaster" />
+          </AssociationSet>
+          <AssociationSet Name="QuizMaster_SubGroupMaster_FK" Association="Self.QuizMaster_SubGroupMaster_FK">
+            <End Role="SubGroupMaster" EntitySet="SubGroupMaster" />
+            <End Role="QuizMaster" EntitySet="QuizMaster" />
+          </AssociationSet>
+          <AssociationSet Name="Result_Examination_FK" Association="Self.Result_Examination_FK">
+            <End Role="Examination" EntitySet="Examination" />
+            <End Role="Result" EntitySet="Result" />
+          </AssociationSet>
+          <AssociationSet Name="Result_SubGroupMaster_FK" Association="Self.Result_SubGroupMaster_FK">
+            <End Role="SubGroupMaster" EntitySet="SubGroupMaster" />
+            <End Role="Result" EntitySet="Result" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CMSContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleID" Type="Int32" Nullable="false" />
+          <Property Name="PageName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KeyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CMSModule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CMSPage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleID" Type="Int32" Nullable="false" />
+          <Property Name="PageName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KeyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Content1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Examination">
+          <Key>
+            <PropertyRef Name="ExamID" />
+          </Key>
+          <Property Name="ExamID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="CandidateID" Type="Int64" Nullable="false" />
+          <Property Name="ExamDuration" Type="Int64" />
+          <Property Name="ExamStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConductedOn" Type="DateTime" Precision="3" />
+          <Property Name="LastActiveSession" Type="DateTime" Precision="3" />
+          <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="TotalMarks" Type="Int32" />
+          <Property Name="ObtainedMarks" Type="Decimal" Precision="7" Scale="3" />
+          <Property Name="ExamResult" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Commment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ScheduledOn" Type="DateTime" Precision="3" />
+          <Property Name="ScheduledBy" Type="Int64" />
+          <Property Name="ReScheduledBy" Type="Int64" />
+          <Property Name="ReScheduledOn" Type="DateTime" Precision="3" />
+          <Property Name="ConductedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ExamUser" Relationship="Self.Examination_ExamUser_FK" FromRole="Examination" ToRole="ExamUser" />
+          <NavigationProperty Name="GroupMaster" Relationship="Self.Examination_GroupMaster_FK" FromRole="Examination" ToRole="GroupMaster" />
+          <NavigationProperty Name="ExamQuestions" Relationship="Self.ExamQuestion_Examination_FK" FromRole="Examination" ToRole="ExamQuestion" />
+          <NavigationProperty Name="Results" Relationship="Self.Result_Examination_FK" FromRole="Examination" ToRole="Result" />
+        </EntityType>
+        <EntityType Name="ExamQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamID" Type="Int64" Nullable="false" />
+          <Property Name="QuestionID" Type="Int64" Nullable="false" />
+          <Property Name="OptionID" Type="Int64" Nullable="false" />
+          <Property Name="QuestionStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Examination" Relationship="Self.ExamQuestion_Examination_FK" FromRole="ExamQuestion" ToRole="Examination" />
+          <NavigationProperty Name="OptionMaster" Relationship="Self.ExamQuestion_OptionMaster_FK" FromRole="ExamQuestion" ToRole="OptionMaster" />
+          <NavigationProperty Name="QuizMaster" Relationship="Self.ExamQuestion_QuizMaster_FK" FromRole="ExamQuestion" ToRole="QuizMaster" />
+        </EntityType>
+        <EntityType Name="ExamUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserLoginID" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Examinations" Relationship="Self.Examination_ExamUser_FK" FromRole="ExamUser" ToRole="Examination" />
+        </EntityType>
+        <EntityType Name="GroupMaster">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GroupDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Examinations" Relationship="Self.Examination_GroupMaster_FK" FromRole="GroupMaster" ToRole="Examination" />
+          <NavigationProperty Name="SubGroupMasters" Relationship="Self.GroupMaster_SubGroupMaster_FK" FromRole="GroupMaster" ToRole="SubGroupMaster" />
+        </EntityType>
+        <EntityType Name="OptionMaster">
+          <Key>
+            <PropertyRef Name="OptionID" />
+          </Key>
+          <Property Name="OptionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionID" Type="Int64" Nullable="false" />
+          <Property Name="OptionLabel" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="OptionDesc" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Correct" Type="Boolean" Nullable="false" />
+          <Property Name="MarksForOption" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ExamQuestions" Relationship="Self.ExamQuestion_OptionMaster_FK" FromRole="OptionMaster" ToRole="ExamQuestion" />
+          <NavigationProperty Name="QuizMaster" Relationship="Self.QuizMaster_OptionMaster_FK" FromRole="OptionMaster" ToRole="QuizMaster" />
+        </EntityType>
+        <EntityType Name="QuizMaster">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubGroupID" Type="Int32" Nullable="false" />
+          <Property Name="SequenceID" Type="Int32" />
+          <Property Name="QuestionType" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaxMarks" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ExamQuestions" Relationship="Self.ExamQuestion_QuizMaster_FK" FromRole="QuizMaster" ToRole="ExamQuestion" />
+          <NavigationProperty Name="OptionMasters" Relationship="Self.QuizMaster_OptionMaster_FK" FromRole="QuizMaster" ToRole="OptionMaster" />
+          <NavigationProperty Name="SubGroupMaster" Relationship="Self.QuizMaster_SubGroupMaster_FK" FromRole="QuizMaster" ToRole="SubGroupMaster" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamID" Type="Int64" Nullable="false" />
+          <Property Name="SubGroupID" Type="Int32" Nullable="false" />
+          <Property Name="GroupTotal" Type="Int32" />
+          <NavigationProperty Name="Examination" Relationship="Self.Result_Examination_FK" FromRole="Result" ToRole="Examination" />
+          <NavigationProperty Name="SubGroupMaster" Relationship="Self.Result_SubGroupMaster_FK" FromRole="Result" ToRole="SubGroupMaster" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SubGroupMaster">
+          <Key>
+            <PropertyRef Name="SubGroupID" />
+          </Key>
+          <Property Name="SubGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="SubGroupName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TimeToComplete" Type="Double" />
+          <Property Name="SubGroupDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GroupMaster" Relationship="Self.GroupMaster_SubGroupMaster_FK" FromRole="SubGroupMaster" ToRole="GroupMaster" />
+          <NavigationProperty Name="QuizMasters" Relationship="Self.QuizMaster_SubGroupMaster_FK" FromRole="SubGroupMaster" ToRole="QuizMaster" />
+          <NavigationProperty Name="Results" Relationship="Self.Result_SubGroupMaster_FK" FromRole="SubGroupMaster" ToRole="Result" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="Examination_ExamUser_FK">
+          <End Role="ExamUser" Type="Self.ExamUser" Multiplicity="1" />
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExamUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Examination_GroupMaster_FK">
+          <End Role="GroupMaster" Type="Self.GroupMaster" Multiplicity="1" />
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupMaster">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ExamQuestion_Examination_FK">
+          <End Role="Examination" Type="Self.Examination" Multiplicity="1" />
+          <End Role="ExamQuestion" Type="Self.ExamQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examination">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="ExamQuestion">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Result_Examination_FK">
+          <End Role="Examination" Type="Self.Examination" Multiplicity="1" />
+          <End Role="Result" Type="Self.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examination">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ExamQuestion_OptionMaster_FK">
+          <End Role="OptionMaster" Type="Self.OptionMaster" Multiplicity="1" />
+          <End Role="ExamQuestion" Type="Self.ExamQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionMaster">
+              <PropertyRef Name="OptionID" />
+            </Principal>
+            <Dependent Role="ExamQuestion">
+              <PropertyRef Name="OptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ExamQuestion_QuizMaster_FK">
+          <End Role="QuizMaster" Type="Self.QuizMaster" Multiplicity="1" />
+          <End Role="ExamQuestion" Type="Self.ExamQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuizMaster">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="ExamQuestion">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GroupMaster_SubGroupMaster_FK">
+          <End Role="GroupMaster" Type="Self.GroupMaster" Multiplicity="1" />
+          <End Role="SubGroupMaster" Type="Self.SubGroupMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupMaster">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="SubGroupMaster">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="QuizMaster_OptionMaster_FK">
+          <End Role="QuizMaster" Type="Self.QuizMaster" Multiplicity="1" />
+          <End Role="OptionMaster" Type="Self.OptionMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuizMaster">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="OptionMaster">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="QuizMaster_SubGroupMaster_FK">
+          <End Role="SubGroupMaster" Type="Self.SubGroupMaster" Multiplicity="1" />
+          <End Role="QuizMaster" Type="Self.QuizMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubGroupMaster">
+              <PropertyRef Name="SubGroupID" />
+            </Principal>
+            <Dependent Role="QuizMaster">
+              <PropertyRef Name="SubGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Result_SubGroupMaster_FK">
+          <End Role="SubGroupMaster" Type="Self.SubGroupMaster" Multiplicity="1" />
+          <End Role="Result" Type="Self.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubGroupMaster">
+              <PropertyRef Name="SubGroupID" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="SubGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CMSContents" EntityType="Self.CMSContent" />
+          <EntitySet Name="CMSModules" EntityType="Self.CMSModule" />
+          <EntitySet Name="CMSPages" EntityType="Self.CMSPage" />
+          <EntitySet Name="Contents" EntityType="Self.Content" />
+          <EntitySet Name="Examinations" EntityType="Self.Examination" />
+          <EntitySet Name="ExamQuestions" EntityType="Self.ExamQuestion" />
+          <EntitySet Name="ExamUsers" EntityType="Self.ExamUser" />
+          <EntitySet Name="GroupMasters" EntityType="Self.GroupMaster" />
+          <EntitySet Name="OptionMasters" EntityType="Self.OptionMaster" />
+          <EntitySet Name="QuizMasters" EntityType="Self.QuizMaster" />
+          <EntitySet Name="Results" EntityType="Self.Result" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="SubGroupMasters" EntityType="Self.SubGroupMaster" />
+          <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+          <AssociationSet Name="Examination_ExamUser_FK" Association="Self.Examination_ExamUser_FK">
+            <End Role="ExamUser" EntitySet="ExamUsers" />
+            <End Role="Examination" EntitySet="Examinations" />
+          </AssociationSet>
+          <AssociationSet Name="Examination_GroupMaster_FK" Association="Self.Examination_GroupMaster_FK">
+            <End Role="GroupMaster" EntitySet="GroupMasters" />
+            <End Role="Examination" EntitySet="Examinations" />
+          </AssociationSet>
+          <AssociationSet Name="ExamQuestion_Examination_FK" Association="Self.ExamQuestion_Examination_FK">
+            <End Role="Examination" EntitySet="Examinations" />
+            <End Role="ExamQuestion" EntitySet="ExamQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="Result_Examination_FK" Association="Self.Result_Examination_FK">
+            <End Role="Examination" EntitySet="Examinations" />
+            <End Role="Result" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="ExamQuestion_OptionMaster_FK" Association="Self.ExamQuestion_OptionMaster_FK">
+            <End Role="OptionMaster" EntitySet="OptionMasters" />
+            <End Role="ExamQuestion" EntitySet="ExamQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="ExamQuestion_QuizMaster_FK" Association="Self.ExamQuestion_QuizMaster_FK">
+            <End Role="QuizMaster" EntitySet="QuizMasters" />
+            <End Role="ExamQuestion" EntitySet="ExamQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="GroupMaster_SubGroupMaster_FK" Association="Self.GroupMaster_SubGroupMaster_FK">
+            <End Role="GroupMaster" EntitySet="GroupMasters" />
+            <End Role="SubGroupMaster" EntitySet="SubGroupMasters" />
+          </AssociationSet>
+          <AssociationSet Name="QuizMaster_OptionMaster_FK" Association="Self.QuizMaster_OptionMaster_FK">
+            <End Role="QuizMaster" EntitySet="QuizMasters" />
+            <End Role="OptionMaster" EntitySet="OptionMasters" />
+          </AssociationSet>
+          <AssociationSet Name="QuizMaster_SubGroupMaster_FK" Association="Self.QuizMaster_SubGroupMaster_FK">
+            <End Role="SubGroupMaster" EntitySet="SubGroupMasters" />
+            <End Role="QuizMaster" EntitySet="QuizMasters" />
+          </AssociationSet>
+          <AssociationSet Name="Result_SubGroupMaster_FK" Association="Self.Result_SubGroupMaster_FK">
+            <End Role="SubGroupMaster" EntitySet="SubGroupMasters" />
+            <End Role="Result" EntitySet="Results" />
+          </AssociationSet>
+          <FunctionImport Name="ManageCMSContent" ReturnType="Collection(String)">
+            <Parameter Name="pflag" Mode="In" Type="String" />
+            <Parameter Name="ID" Mode="In" Type="Int64" />
+            <Parameter Name="ModuleID" Mode="In" Type="Int32" />
+            <Parameter Name="PageName" Mode="In" Type="String" />
+            <Parameter Name="KeyName" Mode="In" Type="String" />
+            <Parameter Name="Language" Mode="In" Type="String" />
+            <Parameter Name="Content" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ManageContent" ReturnType="Collection(String)">
+            <Parameter Name="pflag" Mode="In" Type="String" />
+            <Parameter Name="ID" Mode="In" Type="Int64" />
+            <Parameter Name="ModuleID" Mode="In" Type="Int32" />
+            <Parameter Name="PageName" Mode="In" Type="String" />
+            <Parameter Name="KeyName" Mode="In" Type="String" />
+            <Parameter Name="Content" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TTModelStoreContainer" CdmEntityContainer="TTEntities">
+          <EntitySetMapping Name="CMSContents">
+            <EntityTypeMapping TypeName="TTModel.CMSContent">
+              <MappingFragment StoreEntitySet="CMSContent">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="PageName" ColumnName="PageName" />
+                <ScalarProperty Name="KeyName" ColumnName="KeyName" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CMSModules">
+            <EntityTypeMapping TypeName="TTModel.CMSModule">
+              <MappingFragment StoreEntitySet="CMSModule">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CMSPages">
+            <EntityTypeMapping TypeName="TTModel.CMSPage">
+              <MappingFragment StoreEntitySet="CMSPage">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PageName" ColumnName="PageName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contents">
+            <EntityTypeMapping TypeName="TTModel.Content">
+              <MappingFragment StoreEntitySet="Content">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="PageName" ColumnName="PageName" />
+                <ScalarProperty Name="KeyName" ColumnName="KeyName" />
+                <ScalarProperty Name="Content1" ColumnName="Content" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Examinations">
+            <EntityTypeMapping TypeName="TTModel.Examination">
+              <MappingFragment StoreEntitySet="Examination">
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="ExamDuration" ColumnName="ExamDuration" />
+                <ScalarProperty Name="ExamStatus" ColumnName="ExamStatus" />
+                <ScalarProperty Name="ConductedOn" ColumnName="ConductedOn" />
+                <ScalarProperty Name="LastActiveSession" ColumnName="LastActiveSession" />
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+                <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+                <ScalarProperty Name="ObtainedMarks" ColumnName="ObtainedMarks" />
+                <ScalarProperty Name="ExamResult" ColumnName="ExamResult" />
+                <ScalarProperty Name="Commment" ColumnName="Commment" />
+                <ScalarProperty Name="ScheduledOn" ColumnName="ScheduledOn" />
+                <ScalarProperty Name="ScheduledBy" ColumnName="ScheduledBy" />
+                <ScalarProperty Name="ReScheduledBy" ColumnName="ReScheduledBy" />
+                <ScalarProperty Name="ReScheduledOn" ColumnName="ReScheduledOn" />
+                <ScalarProperty Name="ConductedBy" ColumnName="ConductedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamQuestions">
+            <EntityTypeMapping TypeName="TTModel.ExamQuestion">
+              <MappingFragment StoreEntitySet="ExamQuestion">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="OptionID" ColumnName="OptionID" />
+                <ScalarProperty Name="QuestionStatus" ColumnName="QuestionStatus" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamUsers">
+            <EntityTypeMapping TypeName="TTModel.ExamUser">
+              <MappingFragment StoreEntitySet="ExamUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserLoginID" ColumnName="UserLoginID" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="MName" ColumnName="MName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupMasters">
+            <EntityTypeMapping TypeName="TTModel.GroupMaster">
+              <MappingFragment StoreEntitySet="GroupMaster">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupDesc" ColumnName="GroupDesc" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OptionMasters">
+            <EntityTypeMapping TypeName="TTModel.OptionMaster">
+              <MappingFragment StoreEntitySet="OptionMaster">
+                <ScalarProperty Name="OptionID" ColumnName="OptionID" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="OptionLabel" ColumnName="OptionLabel" />
+                <ScalarProperty Name="OptionDesc" ColumnName="OptionDesc" />
+                <ScalarProperty Name="Correct" ColumnName="Correct" />
+                <ScalarProperty Name="MarksForOption" ColumnName="MarksForOption" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuizMasters">
+            <EntityTypeMapping TypeName="TTModel.QuizMaster">
+              <MappingFragment StoreEntitySet="QuizMaster">
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="SubGroupID" ColumnName="SubGroupID" />
+                <ScalarProperty Name="SequenceID" ColumnName="SequenceID" />
+                <ScalarProperty Name="QuestionType" ColumnName="QuestionType" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="MaxMarks" ColumnName="MaxMarks" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="TTModel.Result">
+              <MappingFragment StoreEntitySet="Result">
+                <ScalarProperty Name="ResultID" ColumnName="ResultID" />
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+                <ScalarProperty Name="SubGroupID" ColumnName="SubGroupID" />
+                <ScalarProperty Name="GroupTotal" ColumnName="GroupTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="TTModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubGroupMasters">
+            <EntityTypeMapping TypeName="TTModel.SubGroupMaster">
+              <MappingFragment StoreEntitySet="SubGroupMaster">
+                <ScalarProperty Name="SubGroupID" ColumnName="SubGroupID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="SubGroupName" ColumnName="SubGroupName" />
+                <ScalarProperty Name="TimeToComplete" ColumnName="TimeToComplete" />
+                <ScalarProperty Name="SubGroupDesc" ColumnName="SubGroupDesc" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="TTModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="MName" ColumnName="MName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ManageCMSContent" FunctionName="TTModel.Store.ManageCMSContent" />
+          <FunctionImportMapping FunctionImportName="ManageContent" FunctionName="TTModel.Store.ManageContent" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
