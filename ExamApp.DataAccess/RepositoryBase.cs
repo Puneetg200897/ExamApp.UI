@@ -26,22 +26,16 @@ namespace ExamApp.DataAccess
      
         public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
-            IQueryable<T> query = _context.Set<T>().Where(predicate);
+            IQueryable<T> query = _entities.Where(predicate);
             return query;
         }
 
         public void Add(T entity)
         {
             _entities.Add(entity);
-        }
+        }        
 
-        public void Delete(Object entity)
-        {
-            T existing = _entities.Find(entity);
-            _entities.Remove(existing);
-        }
-
-        public T FindById(int Obj)
+        public T FindById(object Obj)
         {
            return _entities.Find(Obj);
         }                
@@ -51,7 +45,14 @@ namespace ExamApp.DataAccess
             _entities.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
         }
-        
-        
+        public void Delete(Object entity)
+        {
+            T existing = _entities.Find(entity);
+            _entities.Remove(existing);
+        }
+        public void Delete(T entity)
+        {
+            _entities.Remove(entity);
+        }
     }
 }

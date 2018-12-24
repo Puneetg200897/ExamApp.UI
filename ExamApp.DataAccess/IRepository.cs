@@ -13,9 +13,12 @@ namespace ExamApp.DataAccess{
 
         IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
         void Add(T entity);
-        void Delete(Object entity);
+
         void Update(T entity);
-        T FindById(int Obj);
+        void Delete(Object entity);
+        void Delete(T entity);
+
+        T FindById(object Obj);
 
     }
 }

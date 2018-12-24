@@ -109,6 +109,7 @@
     <Compile Include="SubGroupMaster.cs">
       <DependentUpon>ExamAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UnitOfWork.cs" />
     <Compile Include="UserProfile.cs">
       <DependentUpon>ExamAppModel.tt</DependentUpon>
     </Compile>
