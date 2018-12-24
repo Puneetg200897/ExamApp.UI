@@ -13,7 +13,7 @@ namespace ExamApp.Business
         dynamic order = new Order().Customer;
         public void Func(Order order)
         {
-            var xys = order?.Customer?.Name
+            var xys = order?.Customer?.Name;
         }
     }
 
