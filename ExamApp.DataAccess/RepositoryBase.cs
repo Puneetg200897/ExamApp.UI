@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data;
+using System.Linq.Expressions;
 namespace ExamApp.DataAccess
 {
     public class RepositoryBase<T> : IRepository<T> where T : class
@@ -15,15 +16,18 @@ namespace ExamApp.DataAccess
         public RepositoryBase(IDbContext context)
         {
             this._context = context;
+            _entities = _context.Set<T>();
         }
 
         public IEnumerable<T> List()
         {
             return _entities.ToList();
         }
-        public IEnumerable<T> List(int Obj)
+     
+        public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
-            return _entities.ToList();
+            IQueryable<T> query = _context.Set<T>().Where(predicate);
+            return query;
         }
 
         public void Add(T entity)
@@ -37,9 +41,9 @@ namespace ExamApp.DataAccess
             _entities.Remove(existing);
         }
 
-        public T FindById(int Id)
+        public T FindById(int Obj)
         {
-           return _entities.Find(Id);
+           return _entities.Find(Obj);
         }                
 
         public void Update(T entity)
@@ -48,9 +52,6 @@ namespace ExamApp.DataAccess
             _context.Entry(entity).State = EntityState.Modified;
         }
         
-        public T FindById(T Obj)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
