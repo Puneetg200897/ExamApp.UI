@@ -11,9 +11,10 @@ namespace ExamApp.Business
     {
         public string result = string.Empty;
         dynamic order = new Order().Customer.ToString();
+        
         public void Func(Order order)
         {
-            var xys = order?.Customer?.Name
+            var xys = order?.Customer?.Name.ToUpper();
         }
     }
 
